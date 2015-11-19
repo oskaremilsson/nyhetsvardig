@@ -15,7 +15,9 @@ Article.prototype.checkDatabase = function() {
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					this.percentage = xmlhttp.responseText;
-					document.body.innerHTML += this.percentage + "%";
+					if(this.percentage != "error") {
+						document.body.innerHTML += this.percentage + "%";
+					}
 	            }
 	        };
 	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + this.id,false);
@@ -29,6 +31,11 @@ Article.prototype.toPage = function() {
 	var a = document.createElement("a");
 	var voteup = document.createElement("a");
 	var votedown = document.createElement("a");
+	var image = document.createElement("img");
+
+	image.setAttribute("src", this.image);
+	image.setAttribute("alt", this.headline);
+	div.appendChild(image);
 
 	a.setAttribute("href", this.url);
 	div.appendChild(h1).appendChild(a).appendChild(document.createTextNode(this.headline));

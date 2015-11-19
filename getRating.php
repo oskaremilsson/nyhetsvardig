@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 } 
 
 
-$sql = "SELECT * FROM newsworthy WHERE newsID = " . _GET["newsID"];
+$sql = "SELECT * FROM newsworthy WHERE newsID = " . $_GET["newsID"];
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -32,5 +32,5 @@ if ($result->num_rows > 0) {
    	echo $percentage;
 }
 else {
-	echo "-1";
+	echo "error";
 }
