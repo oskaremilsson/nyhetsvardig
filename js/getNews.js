@@ -28,7 +28,7 @@ Article.prototype.checkDatabase = function() {
 					}
 	            }
 	        };
-	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + this.id,false);
+	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/getRating.php?newsID=" + this.id,false);
 	xmlhttp.send();
 };
 
