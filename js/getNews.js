@@ -6,8 +6,6 @@ function Article(json) {
 	this.source = json.source;
 	this.id = json.id;
 	this.percentage = 0;
-	
-	this.checkDatabase();
 }
 
 Article.prototype.checkDatabase = function() {
@@ -15,12 +13,15 @@ Article.prototype.checkDatabase = function() {
 	xmlhttp.onreadystatechange = function(_this) {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var str = xmlhttp.responseText;
+					console.log(str.split(","));
 					var percentage = str.split(",")[1];
 					var id = str.split(",")[0];
 					console.log(id);
-					if(percentage != "error") {
-						console.log(document.querySelector("#down-" + id));
-						document.querySelector("#down-" + id).style.width = this.percentage + "px";
+					if(str !== "error") {
+						if(percentage < 0) {
+							percentage = 0;
+						}
+						document.querySelector(".percentbar-" + id).style.width = percentage + "%";
 					}
 	            }
 	        };
@@ -29,47 +30,32 @@ Article.prototype.checkDatabase = function() {
 };
 
 Article.prototype.toPage = function() {
-	/*var div = document.createElement("div");
-	var h1 = document.createElement("h1");
-	var p = document.createElement("p");
-	var a = document.createElement("a");
-	var voteup = document.createElement("a");
-	var votedown = document.createElement("a");
-	var image = document.createElement("img");
-
-	image.setAttribute("src", this.image);
-	image.setAttribute("alt", this.headline);
-	div.appendChild(image);
-
-	a.setAttribute("href", this.url);
-	div.appendChild(h1).appendChild(a).appendChild(document.createTextNode(this.headline));
-	div.appendChild(p).appendChild(document.createTextNode(this.lead));
-	*/
-	
 	var template = document.querySelector("#article-template");
-	var element = template.content.querySelector("#mainWrap").cloneNode(true);
-	console.log(element);
+	var element = template.content.querySelector(".box").cloneNode(true);
 	if(this.image.length > 4) {
 		element.querySelector(".addImage").style.backgroundImage = "url('"+this.image+"')";
 	}
-	element.querySelector(".titleBar h1").appendChild(document.createTextNode(this.headline));
+	var link = document.createElement("a").appendChild(document.createTextNode(this.headline));
+	link.setAttribute("href", this.url);
+	link.setAttribute("alt", this.headline);
+	element.querySelector(".titleBar h1").appendChild(link);
 	element.querySelector(".textSquare p").appendChild(document.createTextNode(this.lead));
-
+	element.querySelector(".percentBar").classList.add("percentbar-" + this.id);
 	
+	console.log(element);
 
-
-	voteup = element.querySelector(".backBar");
+	voteup = element.querySelector(".upvote");
 	voteup.setAttribute("id", "up-" + this.id);
-	//div.appendChild(voteup).appendChild(document.createTextNode("Up"));
 
-	votedown = element.querySelector(".percentBar");
+	votedown = element.querySelector(".downvote");
 	votedown.setAttribute("id", "down-" + this.id);
-	//element.appendChild(votedown).appendChild(document.createTextNode("Down"));
 
-	document.querySelector("main").appendChild(element);
+	document.querySelector("#bigBox").appendChild(element);
 
 	document.querySelector("#up-" + this.id).addEventListener("click", voteUp, true);
 	document.querySelector("#down-" + this.id).addEventListener("click", voteDown, true);
+
+	this.checkDatabase();
 }
 
 function getNews()
@@ -83,8 +69,6 @@ function getNews()
 
 	                for(var i = 0; i < response.result.length; i++) {
 		                article = new Article(response.result[i]);
-		                //articles.push(article);
-		                //articles[i].toPage();
 		                article.toPage();
 	                }
 	            }

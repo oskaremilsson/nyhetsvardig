@@ -4,12 +4,12 @@
 	<meta charset="utf-8" />
 	<title>Newsworthy</title>
 	<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/button.css">
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<template id="article-template">
-			<section id="mainWrap">
-				<div id="bigBox">
 				  <div class="box">
 				  <div class="boxContain">
-				    <div class="info">
+				  <div class="info">
 				 		<div class="addImage">
 				 			<div class="titleBar">
 				 				<h1></h1>
@@ -23,10 +23,12 @@
 				    		<div class="percentBar">
 				    		</div>
 				 		</div>
+				 	<div class="buttons">
+				 			<a href="#" class="upvote action-button shadow animate green">Trovärdigt</a>
+				 			<a href="#" class="downvote action-button shadow animate red">Icke Trovärdigt</a>
+				 	</div>
 				  </div>
 				  </div>
-				</div>
-			</section>
 		</template>
 </head>
 <body>
@@ -38,7 +40,10 @@
 		<div class="seperator"></div>
 		</header>
 		<main>
-
+			<section id="mainWrap">
+				<div id="bigBox">
+				</div>
+			</section>
 		</main>
 		<footer>
 		</footer>
