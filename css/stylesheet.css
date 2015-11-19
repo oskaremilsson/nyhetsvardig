@@ -1,0 +1,133 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.2;
+  background-color:#FFF;
+  margin: 0 auto;
+  padding-top: 200px;
+  transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+}
+.topless{
+  padding-top: 5px;
+  transition: all 500ms ease;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+}
+
+nav {
+  height: 180px;
+}
+
+header {
+    width:100%;
+    background: #FFF;
+    color: #000;
+    position:fixed;
+    top:0;
+    left:0;
+    transition: all 500ms ease;
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+}
+.tiny {
+    height:0px;
+    background: rgba(255,255,255,1);
+    transition: all 500ms ease;
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+    z-index: 200000000;
+}
+
+h1{
+  transition: all 500ms ease;
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+}
+
+.shrinky{
+    font-size: 1em;
+    padding: 0;
+    transition: all 500ms ease;
+      -webkit-transition: all 500ms ease;
+      -moz-transition: all 500ms ease;
+      -o-transition: all 500ms ease;
+  }
+
+.picture {
+    background-image: url("http://i.imgur.com/7S59fAF.png");
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 200px;
+    transition: all 500ms ease;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    transition: all 500ms ease;
+    background-image: url("http://i.imgur.com/kUktYHY.png");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    opacity: 0.75;
+    position: relative;
+    z-index: 200000000;
+  }
+
+.pic:hover {
+  opacity: 1;
+  transition: all 250ms ease;
+}
+
+
+
+/*Sticky footer*/
+
+html,
+body,
+.main {
+  height: 100%;
+}
+
+body {
+  display: table;
+  margin: 0;
+  width: 100%;
+}
+
+.footer {
+  margin-top: 15px;
+  height: 1px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.header,
+.footer {
+  background-color: #c8c8c8;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 767px;
+  padding: 10px;
+  width: 90%;
+}
+.dragon {
+  display: inline;
+}

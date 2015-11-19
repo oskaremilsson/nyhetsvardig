@@ -21,6 +21,9 @@ Article.prototype.checkDatabase = function() {
 						if(percentage < 0) {
 							percentage = 0;
 						}
+						else if(percentage > 100) {
+							percentage = 100;
+						}
 						document.querySelector(".percentbar-" + id).style.width = percentage + "%";
 					}
 	            }
@@ -35,7 +38,8 @@ Article.prototype.toPage = function() {
 	if(this.image.length > 4) {
 		element.querySelector(".addImage").style.backgroundImage = "url('"+this.image+"')";
 	}
-	var link = document.createElement("a").appendChild(document.createTextNode(this.headline));
+	var link = document.createElement("a");
+	link.appendChild(document.createTextNode(this.headline));
 	link.setAttribute("href", this.url);
 	link.setAttribute("alt", this.headline);
 	element.querySelector(".titleBar h1").appendChild(link);

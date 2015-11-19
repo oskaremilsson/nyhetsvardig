@@ -23,6 +23,7 @@ if($result->num_rows > 0 && $vote) {
 	$result = $conn->query($sql);
 }
 elseif($vote) {
+	$vote++;
 	$sql = "INSERT INTO newsworthy (newsID, points, votes) VALUES ('" . $newsID . "', ". $vote .", 1);";
 	$result = $conn->query($sql);
 	var_dump($result);

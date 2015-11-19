@@ -33,6 +33,7 @@
 	background-color: rgba(231, 76, 60, 1);
 	border-bottom: 5px solid #BD3E31;
 	text-shadow: 0px -2px #BD3E31;
+	cursor:pointer;
 }
 
 .red-clicked
@@ -40,6 +41,7 @@
 	margin-top: 10px;
 	background-color: rgba(231, 76, 60, 1);
 	text-shadow: 0px -2px #BD3E31;
+	cursor:not-allowed;
 }
 
 .green
@@ -47,6 +49,7 @@
 	background-color: rgba(130, 191, 86, 1);
 	border-bottom: 5px solid #669644;
 	text-shadow: 0px -2px #669644;
+	cursor:pointer;
 }
 
 .green-clicked
@@ -54,6 +57,7 @@
 	margin-top: 10px;
 	background-color: rgba(130, 191, 86, 1);
 	text-shadow: 0px -2px #669644;
+	cursor:not-allowed;
 }
 
 .opacity {

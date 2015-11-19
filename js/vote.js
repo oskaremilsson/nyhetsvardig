@@ -1,10 +1,34 @@
+function checkDatabase(id) {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var str = xmlhttp.responseText;
+					console.log(str.split(","));
+					var percentage = str.split(",")[1];
+					var id = str.split(",")[0];
+					console.log(id);
+					if(str !== "error") {
+						if(percentage < 0) {
+							percentage = 0;
+						}
+						else if(percentage > 100) {
+							percentage = 100;
+						}
+						document.querySelector(".percentbar-" + id).style.width = percentage + "%";
+					}
+	            }
+	        };
+	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + id,false);
+	xmlhttp.send();
+};
+
 function voteUp(event) {
 	var id = event.target.id.split("-")[1];
 	console.log("click: vote up, id: " + id);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					
+					checkDatabase(id);
 	            }
 	        };
 	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=1",false);
@@ -25,7 +49,7 @@ function voteDown(event) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					
+					checkDatabase(id);
 	            }
 	        };
 	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=-1",false);
