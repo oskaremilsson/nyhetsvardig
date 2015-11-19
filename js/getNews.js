@@ -12,11 +12,15 @@ function Article(json) {
 
 Article.prototype.checkDatabase = function() {
 	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
+	xmlhttp.onreadystatechange = function(_this) {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					this.percentage = xmlhttp.responseText;
-					if(this.percentage != "error") {
-						document.body.innerHTML += this.percentage + "%";
+					var str = xmlhttp.responseText;
+					var percentage = str.split(",")[1];
+					var id = str.split(",")[0];
+					console.log(id);
+					if(percentage != "error") {
+						console.log(document.querySelector("#down-" + id));
+						document.querySelector("#down-" + id).style.width = this.percentage + "px";
 					}
 	            }
 	        };
@@ -25,7 +29,7 @@ Article.prototype.checkDatabase = function() {
 };
 
 Article.prototype.toPage = function() {
-	var div = document.createElement("div");
+	/*var div = document.createElement("div");
 	var h1 = document.createElement("h1");
 	var p = document.createElement("p");
 	var a = document.createElement("a");
@@ -40,17 +44,29 @@ Article.prototype.toPage = function() {
 	a.setAttribute("href", this.url);
 	div.appendChild(h1).appendChild(a).appendChild(document.createTextNode(this.headline));
 	div.appendChild(p).appendChild(document.createTextNode(this.lead));
+	*/
+	
+	var template = document.querySelector("#article-template");
+	var element = template.content.querySelector("#mainWrap").cloneNode(true);
+	console.log(element);
+	if(this.image.length > 4) {
+		element.querySelector(".addImage").style.backgroundImage = "url('"+this.image+"')";
+	}
+	element.querySelector(".titleBar h1").appendChild(document.createTextNode(this.headline));
+	element.querySelector(".textSquare p").appendChild(document.createTextNode(this.lead));
 
-	voteup.setAttribute("href", "#");
+	
+
+
+	voteup = element.querySelector(".backBar");
 	voteup.setAttribute("id", "up-" + this.id);
-	voteup.setAttribute("name", this.id);
-	div.appendChild(voteup).appendChild(document.createTextNode("Up"));
+	//div.appendChild(voteup).appendChild(document.createTextNode("Up"));
 
-	votedown.setAttribute("href", "#");
+	votedown = element.querySelector(".percentBar");
 	votedown.setAttribute("id", "down-" + this.id);
-	div.appendChild(votedown).appendChild(document.createTextNode("Down"));
+	//element.appendChild(votedown).appendChild(document.createTextNode("Down"));
 
-	document.querySelector("body").insertBefore(div, document.querySelector("script"));
+	document.querySelector("main").appendChild(element);
 
 	document.querySelector("#up-" + this.id).addEventListener("click", voteUp, true);
 	document.querySelector("#down-" + this.id).addEventListener("click", voteDown, true);
@@ -63,15 +79,17 @@ function getNews()
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	                var response = JSON.parse(xmlhttp.responseText);
-	                var article = new Article(response.result[0]);
-	                var article2 = new Article(response.result[1]);
-	                articles.push(article);
-	                articles.push(article2);
-	                articles[0].toPage();
-	                articles[1].toPage();
+	                var article;
+
+	                for(var i = 0; i < response.result.length; i++) {
+		                article = new Article(response.result[i]);
+		                //articles.push(article);
+		                //articles[i].toPage();
+		                article.toPage();
+	                }
 	            }
 	        };
-	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=media",true);
+	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=media&unique=true",true);
 	xmlhttp.send();
 }
 

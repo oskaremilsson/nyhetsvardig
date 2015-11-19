@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
 
     $obj = json_encode($obj, JSON_FORCE_OBJECT);
    	echo $obj;*/
-   	echo $percentage;
+   	echo $_GET["newsID"] + "," + $percentage;
 }
 else {
 	echo "error";

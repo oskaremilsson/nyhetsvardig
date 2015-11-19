@@ -1,5 +1,6 @@
 function voteUp(event) {
 	var id = event.target.id.split("-")[1];
+	console.log("click: vote up, id: " + id);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -14,6 +15,7 @@ function voteUp(event) {
 
 function voteDown(event) {
 	var id = event.target.id.split("-")[1];
+	console.log("click: vote down, id: " + id);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
