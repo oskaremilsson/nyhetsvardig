@@ -18,7 +18,7 @@ Article.prototype.checkDatabase = function() {
 					document.body.innerHTML += this.percentage + "%";
 	            }
 	        };
-	xmlhttp.open("GET","http://localhost/getRating.php",false);
+	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + this.id,false);
 	xmlhttp.send();
 };
 
@@ -57,8 +57,11 @@ function getNews()
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	                var response = JSON.parse(xmlhttp.responseText);
 	                var article = new Article(response.result[0]);
+	                var article2 = new Article(response.result[1]);
 	                articles.push(article);
+	                articles.push(article2);
 	                articles[0].toPage();
+	                articles[1].toPage();
 	            }
 	        };
 	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=media",true);
