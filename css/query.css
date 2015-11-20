@@ -1,0 +1,21 @@
+
+@media (max-width: 965px) {
+	.box {
+		width: 100%;
+		margin-top: 3px;
+		margin-left: 0px;
+	}
+
+	.backBar {
+	max-width: 460px;
+	}
+
+	.pic {
+		width: 0;
+		height: 0;
+	}
+
+	.info {
+		max-width: 460px;
+	}
+}
