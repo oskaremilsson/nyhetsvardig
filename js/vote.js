@@ -59,7 +59,7 @@ function checkDatabase(id) {
 					}
 	            }
 	        };
-	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + id,false);
+	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/getRating.php?newsID=" + id,false);
 	xmlhttp.send();
 };
 
@@ -72,7 +72,7 @@ function voteUp(event) {
 					checkDatabase(id);
 	            }
 	        };
-	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=1",false);
+	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/updateRating.php?newsID="+ id + "&vote=1",false);
 	xmlhttp.send();
 
 	event.target.removeEventListener("click", voteUp, true);
@@ -93,7 +93,7 @@ function voteDown(event) {
 					checkDatabase(id);
 	            }
 	        };
-	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=-1",false);
+	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/updateRating.php?newsID="+ id + "&vote=-1",false);
 	xmlhttp.send();
 
 	document.querySelector("#up-" + event.target.id.split("-")[1]).removeEventListener("click", voteUp, true);
