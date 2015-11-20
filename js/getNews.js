@@ -9,27 +9,7 @@ function Article(json) {
 }
 
 Article.prototype.checkDatabase = function() {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function(_this) {
-	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					var str = xmlhttp.responseText;
-					console.log(str.split(","));
-					var percentage = str.split(",")[1];
-					var id = str.split(",")[0];
-					console.log(id);
-					if(str !== "error") {
-						if(percentage < 0) {
-							percentage = 0;
-						}
-						else if(percentage > 100) {
-							percentage = 100;
-						}
-						document.querySelector(".percentbar-" + id).style.width = percentage + "%";
-					}
-	            }
-	        };
-	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/getRating.php?newsID=" + this.id,false);
-	xmlhttp.send();
+	checkDatabase(this.id);
 };
 
 Article.prototype.toPage = function() {
@@ -45,8 +25,6 @@ Article.prototype.toPage = function() {
 	element.querySelector(".titleBar h1").appendChild(link);
 	element.querySelector(".textSquare p").appendChild(document.createTextNode(this.lead));
 	element.querySelector(".percentBar").classList.add("percentbar-" + this.id);
-	
-	console.log(element);
 
 	voteup = element.querySelector(".upvote");
 	voteup.setAttribute("id", "up-" + this.id);
@@ -73,11 +51,13 @@ function getNews()
 
 	                for(var i = 0; i < response.result.length; i++) {
 		                article = new Article(response.result[i]);
-		                article.toPage();
+		                if(article.headline.length > 2){
+		                	article.toPage();
+		                }
 	                }
 	            }
 	        };
-	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=media&unique=true",true);
+	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=sverige&unique=true",true);
 	xmlhttp.send();
 }
 

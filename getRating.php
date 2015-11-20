@@ -2,7 +2,9 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "newsworthy";
+//$dbname = "newsworthy";
+$dbname = "hackaton";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -12,7 +14,7 @@ if ($conn->connect_error) {
 
 if(isset($_GET["newsID"]))
 {
-	$newsID = $_GET["newsID"];
+	$newsID = htmlspecialchars($_GET['newsID'], ENT_QUOTES, "ISO-8859-1");
 }
 
 $sql = "SELECT * FROM newsworthy WHERE newsID = " . $newsID;

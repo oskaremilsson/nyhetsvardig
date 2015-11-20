@@ -1,24 +1,49 @@
+//"http://dragonslayer96.se/dragonhacker96/nyhetsvardig/";
+
 function checkDatabase(id) {
+	console.log(id);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var str = xmlhttp.responseText;
-					console.log(str.split(","));
 					var percentage = str.split(",")[1];
 					var id = str.split(",")[0];
-					console.log(id);
+					console.log(str);
 					if(str !== "error") {
-						if(percentage < 0) {
-							percentage = 0;
+						if(percentage < 2) {
+							percentage = 2;
 						}
 						else if(percentage > 100) {
 							percentage = 100;
 						}
-						document.querySelector(".percentbar-" + id).style.width = percentage + "%";
+
+						var bar = document.querySelector(".percentbar-" + id);
+						
+						if(bar.classList.contains("redBar")) {
+							bar.classList.remove("redBar");
+						}
+						else if(bar.classList.contains("orangeBar")) {
+							bar.classList.remove("orangeBar");
+						}
+						else if(bar.classList.contains("greenBar")) {
+							bar.classList.remove("greenBar");
+						}
+
+						if(percentage <= 25){
+							bar.classList.add("redBar");
+						}
+						else if(percentage > 25 && percentage < 80) {
+							bar.classList.add("orangeBar");
+						}
+						else if(percentage >= 80) {
+							bar.classList.add("greenBar");
+						}
+						
+						bar.style.width = percentage + "%";
 					}
 	            }
 	        };
-	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/getRating.php?newsID=" + id,false);
+	xmlhttp.open("GET","http://localhost/getRating.php?newsID=" + id,false);
 	xmlhttp.send();
 };
 
@@ -31,7 +56,7 @@ function voteUp(event) {
 					checkDatabase(id);
 	            }
 	        };
-	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/updateRating.php?newsID="+ id + "&vote=1",false);
+	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=1",false);
 	xmlhttp.send();
 
 	event.target.removeEventListener("click", voteUp, true);
@@ -52,7 +77,7 @@ function voteDown(event) {
 					checkDatabase(id);
 	            }
 	        };
-	xmlhttp.open("GET","http://dragonslayer96.se/dragonhacker96/nyhetsvardig/updateRating.php?newsID="+ id + "&vote=-1",false);
+	xmlhttp.open("GET","http://localhost/updateRating.php?newsID="+ id + "&vote=-1",false);
 	xmlhttp.send();
 
 	document.querySelector("#up-" + event.target.id.split("-")[1]).removeEventListener("click", voteUp, true);

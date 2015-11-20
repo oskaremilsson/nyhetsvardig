@@ -74,7 +74,7 @@ h1{
 
 .pic {
     display: block;
-    margin-left: auto;
+    margin-left: 10px;
     margin-right: auto;
     margin-top: 20px;
     height: 100px;
@@ -87,6 +87,7 @@ h1{
     opacity: 0.75;
     position: relative;
     z-index: 200000000;
+    float:left;
   }
 
 .pic:hover {
