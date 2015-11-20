@@ -84,6 +84,6 @@ function getMoreNews() {
 	                document.querySelector(".load-more").classList.remove('load-more--loading');
 	            }
 	        };
-	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=e-sport&unique=true&indexed_to="+last,true);
+	xmlhttp.open("GET","https://api.overviewnews.com/v1/search.json?key=DsUKxG2iiZV9BRnspdDbdmAiaixvCvHstsQZ&q=e-sport&limit=11&unique=true&indexed_to="+last,true);
 	xmlhttp.send();
 }
