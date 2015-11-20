@@ -7,17 +7,33 @@ function checkDatabase(id) {
 	            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var str = xmlhttp.responseText;
 					var percentage = str.split(",")[1];
+					var truePercentage = parseInt(percentage);
+
+					if(truePercentage < 0) {
+						truePercentage = 0;
+					}
+
 					var id = str.split(",")[0];
 					console.log(str);
 					if(str !== "error") {
-						if(percentage < 2) {
-							percentage = 2;
+						if(percentage < 7) {
+							percentage = 7;
 						}
 						else if(percentage > 100) {
 							percentage = 100;
+							truePercentage = 100;
 						}
 
 						var bar = document.querySelector(".percentbar-" + id);
+
+						var p = document.createElement("p");
+						p.appendChild(document.createTextNode(truePercentage + "%"));
+						p.classList.add("percent-text");
+
+						if(bar.querySelector("p")){
+							bar.replaceChild(p, bar.querySelector("p"));
+						}
+						bar.appendChild(p);
 						
 						if(bar.classList.contains("redBar")) {
 							bar.classList.remove("redBar");
